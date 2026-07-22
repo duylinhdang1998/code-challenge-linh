@@ -1,0 +1,196 @@
+@keyframes bg-drift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: scale(1) translate(0, 0); }
+  50%       { transform: scale(1.12) translate(12px, -12px); }
+}
+
+@keyframes orb-float-b {
+  0%, 100% { transform: scale(1) translate(0, 0); }
+  50%       { transform: scale(1.15) translate(-10px, 10px); }
+}
+
+.app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(-45deg, #f6f5ff, #fdf4ff, #f0f4ff, #fdf4ff);
+  background-size: 400% 400%;
+  animation: bg-drift 20s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.app-bg__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+.app-bg__orb--a {
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  left: -150px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+  animation: orb-float 16s ease-in-out infinite;
+}
+
+.app-bg__orb--b {
+  width: 500px;
+  height: 500px;
+  bottom: -100px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(219, 39, 119, 0.05) 0%, transparent 70%);
+  animation: orb-float-b 19s ease-in-out infinite;
+}
+
+.app-bg__orb--c {
+  width: 280px;
+  height: 280px;
+  top: 45%;
+  left: 58%;
+  background: radial-gradient(circle, rgba(192, 38, 211, 0.04) 0%, transparent 70%);
+  animation: orb-float 22s ease-in-out infinite reverse;
+}
+
+/* ─── App shell ──────────────────────────────────────────────────────────── */
+.app {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+  padding: 0 16px;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+.app__header {
+  width: 100%;
+  max-width: 480px;
+  padding: 36px 0 24px;
+  text-align: center;
+}
+
+.app__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--c-text);
+  text-decoration: none;
+}
+
+.app__brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  background: linear-gradient(135deg, var(--c-accent-a), var(--c-accent-c));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}
+
+.app__brand-text {
+  background: linear-gradient(90deg, var(--c-accent-a), var(--c-accent-c));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app__tagline {
+  margin-top: 6px;
+  font-size: 0.875rem;
+  color: var(--c-text-muted);
+  letter-spacing: 0.01em;
+}
+
+/* ─── Main content ────────────────────────────────────────────────────────── */
+.app__main {
+  width: 100%;
+  max-width: 480px;
+  flex: 1;
+  padding-bottom: 40px;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+.app__footer {
+  width: 100%;
+  max-width: 480px;
+  padding: 20px 0 28px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--c-text-muted);
+  letter-spacing: 0.01em;
+  border-top: 1px solid var(--c-border);
+}
+
+/* ─── Error card ─────────────────────────────────────────────────────────── */
+.error-card {
+  background: var(--c-surface-card);
+  border: 1px solid var(--c-error-border);
+  border-radius: var(--r-xl);
+  padding: 40px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.error-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--c-error-bg);
+  border: 1px solid var(--c-error-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--c-error);
+  font-weight: 700;
+}
+
+.error-card__title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--c-text);
+}
+
+.error-card__message {
+  font-size: 0.875rem;
+  color: var(--c-text-secondary);
+  max-width: 300px;
+}
+
+.error-card__retry {
+  margin-top: 4px;
+  padding: 10px 24px;
+  border-radius: var(--r-full);
+  background: linear-gradient(135deg, var(--c-accent-a), var(--c-accent-c));
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-btn);
+  transition: box-shadow var(--dur-normal) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+
+.error-card__retry:hover {
+  box-shadow: var(--shadow-btn-hover);
+  transform: translateY(-1px);
+}
+
+.error-card__retry:active {
+  transform: translateY(0);
+}
